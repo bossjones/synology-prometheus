@@ -2,8 +2,8 @@
 
 _DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-sudo docker stop snmp_exporter || true
-sudo docker rm snmp_exporter || true
+sudo docker stop node-exporter || true
+sudo docker rm node-exporter || true
 
 sudo docker run \
 --restart=always \

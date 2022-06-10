@@ -5,7 +5,7 @@ _DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 sudo docker stop node-exporter || true
 sudo docker rm node-exporter || true
 
-sudo docker run \
+sudo docker run -d \
 --restart=always \
 --name=node-exporter \
 --net=host \

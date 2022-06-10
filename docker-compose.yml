@@ -1,35 +1,37 @@
 version: "3.8"
 services:
-  prometheus:
-    container_name: prometheus
-    image: quay.io/prometheus/prometheus:v2.26.0
-    volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./rules:/etc/prometheus/rules
-    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
-    ports:
-      - 9090:9090
+  # prometheus:
+  #   container_name: prometheus
+  #   image: quay.io/prometheus/prometheus:v2.26.0
+  #   volumes:
+  #     - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - ./rules:/etc/prometheus/rules
+  #   command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+  #   ports:
+  #     - 9090:9090
 
-  grafana:
-    container_name: grafana
-    image: grafana/grafana
-    ports:
-      - "3000:3000"
-    depends_on:
-      - prometheus
+  # grafana:
+  #   container_name: grafana
+  #   image: grafana/grafana
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - prometheus
 
-  alertmanager:
-    container_name: alertmanager
-    image: prom/alertmanager:v0.21.0
-    ports:
-      - 9093:9093
-    volumes:
-      - ./config/alertmanager.yml:/etc/alertmanager/alertmanager.yml
-    restart: always
-  
+  # alertmanager:
+  #   container_name: alertmanager
+  #   image: prom/alertmanager:v0.21.0
+  #   ports:
+  #     - 9093:9093
+  #   volumes:
+  #     - ./config/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+  #   restart: always
+
   node-exporter:
     privileged: true
-    image: prom/node-exporter
+    network_mode: "host"
+    pid: "host"
+    image: quay.io/prometheus/node-exporter:v1.3.1
     container_name: node-exporter
     restart: unless-stopped
     ports:

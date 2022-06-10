@@ -5,6 +5,7 @@ set -x
 _DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 sudo docker run \
+--rm \
 --restart=always \
 --name=snmp_exporter \
 --net=host \
